@@ -1924,6 +1924,41 @@ Bentuk soal dipilih sebelum deteksi. Periksa kembali kunci dan hasil deteksi seb
       teacherAccessRef = firebaseDatabase.ref('edustudy/teacherAccess');
     }
 
+    // Migrasi katalog mapel satu kali: tambahkan 11 mapel bawaan yang belum ada
+    // ke Firebase aktif tanpa menggandakan mapel yang sudah tersimpan.
+    // Migrasi hanya dijalankan oleh akun guru yang memiliki izin menulis database.
+    async function migrateDefaultSubjectsToCloud() {
+      if (!cloudReady || !cloudDatabaseRef || !firebaseAuth?.currentUser || currentSession?.role !== 'teacher') return;
+      try {
+        const result = await cloudDatabaseRef.transaction(currentData => {
+          const data = currentData && typeof currentData === 'object' ? currentData : {};
+          if (Number(data.subjectCatalogVersion || 0) >= 1) return;
+          const existing = Array.isArray(data.subjects) ? data.subjects.filter(Boolean) : [];
+          const ids = new Set(existing.map(item => String(item.id || '')));
+          const names = new Set(existing.map(item => String(item.name || '').trim().toLocaleLowerCase('id')));
+          const additions = (DEFAULT_DB.subjects || []).filter(item =>
+            !ids.has(String(item.id)) && !names.has(String(item.name || '').trim().toLocaleLowerCase('id'))
+          );
+          return {
+            ...data,
+            subjects: [...existing, ...cloneDB(additions)],
+            subjectCatalogVersion: 1
+          };
+        }, undefined, false);
+        if (result.committed && result.snapshot?.val()) {
+          const remote = result.snapshot.val();
+          appDB.subjects = Array.isArray(remote.subjects) ? remote.subjects : [];
+          lastSyncedDB = cloneDB(remote);
+          lastSyncedDB.students = [];
+          refreshActiveView();
+          showToast('Katalog 11 mata pelajaran berhasil disinkronkan ke Firebase.', 'success');
+        }
+      } catch (error) {
+        console.error('Subject catalog migration failed:', error);
+        showToast('11 mapel belum berhasil disinkronkan. Periksa koneksi dan Firebase Rules.', 'danger');
+      }
+    }
+
     async function initializeCloudDatabase() {
       if (!firebaseAuth || !firebaseAuth.currentUser) throw new Error('Silakan login terlebih dahulu.');
       const snapshot = await cloudDatabaseRef.once('value');
@@ -1953,7 +1988,10 @@ Bentuk soal dipilih sebelum deteksi. Periksa kembali kunci dan hasil deteksi seb
           lastSyncedDB = cloneDB(remoteData);
           lastSyncedDB.students = [];
           cloudReady = true;
-          if (currentSession && currentSession.role === 'teacher') subscribeTeacherStudentProfiles();
+          if (currentSession && currentSession.role === 'teacher') {
+            subscribeTeacherStudentProfiles();
+            migrateDefaultSubjectsToCloud();
+          }
           if (cloudWritePending) { cloudWritePending = false; saveDB(); }
           if (!sessionRestoreInProgress) {
             if (!window.__edustudyInitialRenderDone) {
