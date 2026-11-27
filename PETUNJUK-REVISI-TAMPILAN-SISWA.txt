@@ -1,0 +1,23 @@
+EDUSTUDY - REVISI TAMPILAN SISWA
+
+Perubahan:
+1. Kartu pada halaman Pelajaran dan Latihan memakai pola tampilan yang seragam.
+2. Halaman Pelajaran hanya memiliki tombol Baca Materi.
+3. Halaman Latihan hanya memiliki tombol Latihan.
+4. Navigasi siswa memakai indikator aktif bergerak dengan transisi CSS yang lebih halus dan ringan.
+5. Ikon dan label membesar saat hover/focus; tombol Latihan tetap menonjol di tengah.
+6. Password pada form login/daftar dapat ditampilkan atau disembunyikan saat diketik.
+7. Dashboard siswa menggunakan Home sebagai halaman awal bawaan dan saat logo ditekan.
+8. Tombol Lupa password memberikan petunjuk pemulihan yang aman.
+
+PENTING TENTANG PASSWORD:
+Firebase Authentication tidak menyimpan password dalam bentuk teks yang dapat dibaca kembali. Karena itu password yang sudah tersimpan tidak dapat ditampilkan dari halaman Profil. Tombol mata hanya memperlihatkan password yang sedang diketik. Link Lupa password saat ini mengarahkan siswa untuk meminta bantuan guru/admin. Reset mandiri yang benar-benar mengubah password memerlukan email pemulihan yang dapat diakses atau backend tepercaya (misalnya Firebase Admin SDK + Cloud Functions). Jangan pernah menyimpan password asli dalam Realtime Database.
+
+Pemasangan:
+1. Backup index.html lama.
+2. Ganti index.html di root repository GitHub dengan file baru.
+3. Commit ke branch deployment.
+4. Tunggu Vercel berstatus Ready.
+5. Uji login, Home, Pelajaran, Latihan, navigasi HP, dan buka materi/soal.
+
+Validasi yang dilakukan: JavaScript inline diperiksa dengan Node.js (node --check). Koneksi Firebase dan perilaku UI pada perangkat nyata belum diuji dari sini.
