@@ -1569,136 +1569,173 @@ Bentuk soal dipilih sebelum deteksi. Periksa kembali kunci dan hasil deteksi seb
       { id: 'av8', emoji: '🐯', label: 'Harimau Tangkas' }
     ];
 
-    // 25 Pilihan Ikon Mata Pelajaran (Lengkap untuk berbagai bidang studi)
+    // 150 ikon mata pelajaran: dapat dicari berdasarkan nama/kategori.
     const SUBJECT_ICONS = [
       { emoji: '📐', label: 'Matematika' },
-      { emoji: '🧮', label: 'Aritmatika' },
-      { emoji: '🔬', label: 'Biologi / Lab' },
+      { emoji: '🧮', label: 'Berhitung' },
+      { emoji: '➗', label: 'Pembagian' },
+      { emoji: '✖️', label: 'Perkalian' },
+      { emoji: '➕', label: 'Penjumlahan' },
+      { emoji: '➖', label: 'Pengurangan' },
+      { emoji: '🔢', label: 'Angka' },
+      { emoji: '📏', label: 'Pengukuran' },
+      { emoji: '📈', label: 'Grafik' },
+      { emoji: '📉', label: 'Statistika' },
+      { emoji: '🔬', label: 'Laboratorium' },
       { emoji: '🧪', label: 'Kimia' },
-      { emoji: '⚛️', label: 'Fisika / Atom' },
-      { emoji: '🧬', label: 'Genetika' },
-      { emoji: '🌱', label: 'Botani / Alam' },
-      { emoji: '🌍', label: 'Geografi' },
-      { emoji: '🧭', label: 'Navigasi' },
+      { emoji: '⚛️', label: 'Fisika' },
+      { emoji: '🧬', label: 'Biologi' },
+      { emoji: '🦠', label: 'Mikrobiologi' },
+      { emoji: '🧫', label: 'Kultur Sel' },
+      { emoji: '🌱', label: 'Tumbuhan' },
+      { emoji: '🌳', label: 'Lingkungan' },
+      { emoji: '🌍', label: 'Bumi' },
+      { emoji: '🌦️', label: 'Cuaca' },
+      { emoji: '🌋', label: 'Geologi' },
+      { emoji: '🪨', label: 'Batuan' },
+      { emoji: '💧', label: 'Air' },
+      { emoji: '🌊', label: 'Laut' },
+      { emoji: '🌿', label: 'Ekologi' },
+      { emoji: '🦋', label: 'Serangga' },
+      { emoji: '🐾', label: 'Hewan' },
+      { emoji: '🧠', label: 'Sains Otak' },
+      { emoji: '🔭', label: 'Astronomi' },
+      { emoji: '🪐', label: 'Planet' },
+      { emoji: '📖', label: 'Bahasa Indonesia' },
+      { emoji: '✍️', label: 'Menulis' },
+      { emoji: '📝', label: 'Tugas Menulis' },
+      { emoji: '📚', label: 'Literasi' },
+      { emoji: '🔤', label: 'Tata Bahasa' },
+      { emoji: '🗣️', label: 'Berbicara' },
+      { emoji: '🎙️', label: 'Presentasi' },
+      { emoji: '📜', label: 'Sastra' },
+      { emoji: '📰', label: 'Jurnalistik' },
+      { emoji: '🖋️', label: 'Kaligrafi' },
+      { emoji: '🇬🇧', label: 'Bahasa Inggris' },
+      { emoji: '🌐', label: 'Bahasa Asing' },
+      { emoji: '💬', label: 'Percakapan' },
+      { emoji: '🎧', label: 'Menyimak' },
+      { emoji: '📢', label: 'Pidato' },
+      { emoji: '🔠', label: 'Kosakata' },
+      { emoji: '📕', label: 'Membaca' },
+      { emoji: '📄', label: 'Dokumen' },
+      { emoji: '🗨️', label: 'Komunikasi' },
+      { emoji: '🧾', label: 'Laporan' },
       { emoji: '🏛️', label: 'Sejarah' },
       { emoji: '⏳', label: 'Kronologi' },
-      { emoji: '📖', label: 'B. Indonesia' },
-      { emoji: '🗣️', label: 'B. Inggris' },
-      { emoji: '✍️', label: 'Sastra / Tulis' },
-      { emoji: '💻', label: 'Informatika' },
-      { emoji: '🤖', label: 'Robotika / AI' },
-      { emoji: '📊', label: 'Ekonomi' },
-      { emoji: '💰', label: 'Akuntansi' },
-      { emoji: '⚖️', label: 'PPKn / Hukum' },
+      { emoji: '🗺️', label: 'Peta' },
+      { emoji: '🧭', label: 'Geografi' },
+      { emoji: '🏺', label: 'Arkeologi' },
+      { emoji: '🗿', label: 'Peninggalan' },
+      { emoji: '⚖️', label: 'Pancasila dan Hukum' },
+      { emoji: '🤝', label: 'Kewarganegaraan' },
+      { emoji: '🇮🇩', label: 'Indonesia' },
+      { emoji: '🕊️', label: 'Perdamaian' },
       { emoji: '👥', label: 'Sosiologi' },
+      { emoji: '🏘️', label: 'Masyarakat' },
+      { emoji: '🌏', label: 'Keberagaman' },
+      { emoji: '🧑\u200d🤝\u200d🧑', label: 'Kerja Sama' },
+      { emoji: '🗳️', label: 'Demokrasi' },
+      { emoji: '🧩', label: 'Pemecahan Masalah' },
+      { emoji: '🧑\u200d⚖️', label: 'Keadilan' },
+      { emoji: '🏙️', label: 'Kota' },
+      { emoji: '🧑\u200d💼', label: 'Kepemimpinan' },
+      { emoji: '🕌', label: 'Pendidikan Agama Islam' },
+      { emoji: '📿', label: 'Ibadah' },
+      { emoji: '☪️', label: 'Islam' },
+      { emoji: '🕋', label: 'Al-Qur’an' },
+      { emoji: '📗', label: 'Kitab Suci' },
+      { emoji: '❤️', label: 'Akhlak' },
+      { emoji: '🙏', label: 'Spiritualitas' },
+      { emoji: '🌟', label: 'Nilai Kehidupan' },
+      { emoji: '🫶', label: 'Kepedulian' },
+      { emoji: '⚽', label: 'Sepak Bola' },
+      { emoji: '🏀', label: 'Bola Basket' },
+      { emoji: '🏐', label: 'Bola Voli' },
+      { emoji: '🏸', label: 'Bulu Tangkis' },
+      { emoji: '🏓', label: 'Tenis Meja' },
+      { emoji: '🏃', label: 'Atletik' },
+      { emoji: '🤸', label: 'Senam' },
+      { emoji: '🥇', label: 'Prestasi Olahraga' },
+      { emoji: '💪', label: 'Kebugaran' },
+      { emoji: '🧘', label: 'Kesehatan Jasmani' },
       { emoji: '🎨', label: 'Seni Rupa' },
+      { emoji: '🖌️', label: 'Melukis' },
+      { emoji: '🖍️', label: 'Menggambar' },
+      { emoji: '🎭', label: 'Seni Teater' },
+      { emoji: '🎬', label: 'Film' },
       { emoji: '🎵', label: 'Seni Musik' },
-      { emoji: '⚽', label: 'Olahraga' },
-      { emoji: '🕌', label: 'Pend. Agama' },
-      { emoji: '🛠️', label: 'Prakarya' }
+      { emoji: '🎼', label: 'Notasi Musik' },
+      { emoji: '🎸', label: 'Gitar' },
+      { emoji: '🥁', label: 'Perkusi' },
+      { emoji: '🎤', label: 'Vokal' },
+      { emoji: '💃', label: 'Seni Tari' },
+      { emoji: '🩰', label: 'Balet' },
+      { emoji: '🪭', label: 'Tari Tradisional' },
+      { emoji: '🎻', label: 'Instrumen Gesek' },
+      { emoji: '🎹', label: 'Piano' },
+      { emoji: '🪇', label: 'Alat Musik' },
+      { emoji: '🧵', label: 'Kerajinan' },
+      { emoji: '🪡', label: 'Menjahit' },
+      { emoji: '🧶', label: 'Tekstil' },
+      { emoji: '🪚', label: 'Pertukangan' },
+      { emoji: '💻', label: 'Komputer' },
+      { emoji: '🖥️', label: 'Komputasi' },
+      { emoji: '⌨️', label: 'Pemrograman' },
+      { emoji: '🖱️', label: 'Teknologi Digital' },
+      { emoji: '📱', label: 'Aplikasi' },
+      { emoji: '🤖', label: 'Robotika' },
+      { emoji: '🧑\u200d💻', label: 'Coding' },
+      { emoji: '🔌', label: 'Elektronika' },
+      { emoji: '🔋', label: 'Kelistrikan' },
+      { emoji: '🛜', label: 'Jaringan' },
+      { emoji: '📡', label: 'Telekomunikasi' },
+      { emoji: '🧰', label: 'Teknik' },
+      { emoji: '⚙️', label: 'Rekayasa' },
+      { emoji: '🛠️', label: 'Peralatan Teknik' },
+      { emoji: '🔧', label: 'Perbaikan' },
+      { emoji: '🪛', label: 'Instalasi' },
+      { emoji: '🧯', label: 'Keselamatan Kerja' },
+      { emoji: '🏗️', label: 'Konstruksi' },
+      { emoji: '🚦', label: 'Sistem' },
+      { emoji: '📊', label: 'Ekonomi' },
+      { emoji: '💰', label: 'Keuangan' },
+      { emoji: '💳', label: 'Perbankan' },
+      { emoji: '🛒', label: 'Bisnis' },
+      { emoji: '🏪', label: 'Kewirausahaan' },
+      { emoji: '📦', label: 'Logistik' },
+      { emoji: '💹', label: 'Investasi' },
+      { emoji: '🍎', label: 'Gizi' },
+      { emoji: '🥗', label: 'Pangan' },
+      { emoji: '🍳', label: 'Tata Boga' },
+      { emoji: '🧑\u200d🍳', label: 'Kuliner' },
+      { emoji: '👗', label: 'Mode' },
+      { emoji: '🏥', label: 'Kesehatan' },
+      { emoji: '🩺', label: 'Keperawatan' },
+      { emoji: '🧴', label: 'Farmasi' },
+      { emoji: '🧼', label: 'Kebersihan' },
+      { emoji: '🧑\u200d🔬', label: 'Peneliti' },
+      { emoji: '🧑\u200d🏫', label: 'Pembelajaran' },
+      { emoji: '🎓', label: 'Pendidikan' },
+      { emoji: '🧱', label: 'Material' },
+      { emoji: '🚀', label: 'Inovasi' },
+      { emoji: '🪙', label: 'Mata Uang' },
+      { emoji: '🏆', label: 'Kompetisi' }
     ];
 
     const DEFAULT_DB = {
       subjects: [
-        {
-          id: 'subj-mtk',
-          name: 'Matematika Dasar & Logika',
-          icon: '📐',
-          description: 'Pelajari konsep aljabar, persamaan linear, aritmatika, dan penalaran logis secara bertahap.',
-          materials: [
-            {
-              id: 'mat-mtk-1',
-              title: 'Bab 1: Persamaan Linear Satu Variabel (PLSV)',
-              content: 'Persamaan linear satu variabel adalah kalimat terbuka yang dihubungkan oleh tanda sama dengan (=) dan hanya mempunyai satu variabel berpangkat satu.\n\nBentuk Umum: ax + b = c, dengan a ≠ 0.\n\nContoh Penyelesaian:\nJika 2x + 4 = 12, maka:\n1. Kurangi kedua ruas dengan 4 → 2x = 12 - 4\n2. Sederhanakan → 2x = 8\n3. Bagi kedua ruas dengan 2 → x = 4.\n\nTips: Selalu periksa kembali nilai x dengan memasukkannya ke persamaan awal!'
-            },
-            {
-              id: 'mat-mtk-2',
-              title: 'Bab 2: Pola Bilangan & Barisan Aritmatika',
-              content: 'Barisan aritmatika adalah barisan bilangan yang memiliki selisih (beda) tetap antara dua suku yang berurutan.\n\nRumus Suku ke-n (Un):\nUn = a + (n - 1) × b\n\nKeterangan:\n• a = suku pertama\n• b = beda (U2 - U1)\n• n = urutan suku yang dicari.'
-            }
-          ],
-          questions: [
-            {
-              id: 'q-mtk-1',
-              question: 'Jika 3x - 5 = 16, berapakah nilai dari x?',
-              options: ['5', '6', '7', '8'],
-              correctIndex: 2,
-              explanation: '3x = 16 + 5 → 3x = 21 → x = 21 / 3 = 7.'
-            },
-            {
-              id: 'q-mtk-2',
-              question: 'Diketahui barisan aritmatika: 4, 9, 14, 19, ... Berapakah suku ke-6 dari barisan tersebut?',
-              options: ['24', '29', '34', '39'],
-              correctIndex: 1,
-              explanation: 'Suku pertama (a) = 4, beda (b) = 5. U6 = 4 + (6-1)×5 = 4 + 25 = 29.'
-            },
-            {
-              id: 'q-mtk-3',
-              question: 'Hasil dari 25% dari 240 adalah...',
-              options: ['40', '50', '60', '80'],
-              correctIndex: 2,
-              explanation: '25% sama dengan 1/4. Maka 1/4 × 240 = 60.'
-            }
-          ]
-        },
-        {
-          id: 'subj-ipa',
-          name: 'Ilmu Pengetahuan Alam (IPA)',
-          icon: '🔬',
-          description: 'Eksplorasi ekosistem, struktur sel makhluk hidup, energi, dan hukum dasar fisika.',
-          materials: [
-            {
-              id: 'mat-ipa-1',
-              title: 'Bab 1: Fotosintesis pada Tumbuhan Hijau',
-              content: 'Fotosintesis adalah proses pembuatan makanan oleh tumbuhan hijau dengan bantuan energi cahaya matahari.\n\nKomponen Utama Fotosintesis:\n1. Karbon dioksida (CO₂) diserap melalui stomata daun.\n2. Air (H₂O) diserap oleh akar dari dalam tanah.\n3. Klorofil (zat hijau daun) menangkap energi cahaya matahari.\n\nHasil Fotosintesis: Glukosa (C₆H₁₂O₆) sebagai sumber energi dan Oksigen (O₂) yang dilepaskan ke udara.'
-            }
-          ],
-          questions: [
-            {
-              id: 'q-ipa-1',
-              question: 'Gas yang dilepaskan oleh tumbuhan ke udara sebagai hasil utama fotosintesis adalah...',
-              options: ['Karbon dioksida', 'Nitrogen', 'Oksigen', 'Hidrogen'],
-              correctIndex: 2,
-              explanation: 'Fotosintesis mengubah CO₂ dan air menjadi glukosa dan gas Oksigen (O₂).'
-            },
-            {
-              id: 'q-ipa-2',
-              question: 'Bagian daun yang berfungsi sebagai tempat keluar masuknya gas pada tumbuhan adalah...',
-              options: ['Xilem', 'Stomata', 'Floem', 'Kambium'],
-              correctIndex: 1,
-              explanation: 'Stomata (mulut daun) berfungsi mengatur pertukaran gas CO₂, O₂, dan uap air.'
-            }
-          ]
-        },
-        {
-          id: 'subj-indo',
-          name: 'Bahasa Indonesia & Literasi',
-          icon: '📖',
-          description: 'Pahami struktur teks eksposisi, ide pokok paragraf, dan kaidah penulisan EYD yang baik.',
-          materials: [
-            {
-              id: 'mat-indo-1',
-              title: 'Bab 1: Menentukan Ide Pokok Paragraf',
-              content: 'Ide pokok (gagasan utama) adalah inti pembahasan yang menjadi dasar pengembangan sebuah paragraf.\n\nJenis Paragraf Berdasarkan Letak Kalimat Utama:\n• Deduktif: Kalimat utama terletak di awal paragraf.\n• Induktif: Kalimat utama terletak di akhir paragraf.\n• Campuran: Kalimat utama berada di awal dan ditegaskan kembali di akhir.'
-            }
-          ],
-          questions: [
-            {
-              id: 'q-indo-1',
-              question: 'Paragraf yang kalimat utamanya terletak di bagian akhir disebut paragraf...',
-              options: ['Deduktif', 'Induktif', 'Naratif', 'Deskriptif'],
-              correctIndex: 1,
-              explanation: 'Paragraf induktif diawali kalimat penjelas dan diakhiri kesimpulan/kalimat utama.'
-            },
-            {
-              id: 'q-indo-2',
-              question: 'Penulisan kata baku yang tepat di bawah ini adalah...',
-              options: ['Apotik', 'Aktifitas', 'Analisis', 'Praktek'],
-              correctIndex: 2,
-              explanation: 'Kata baku sesuai KBBI adalah Analisis (bukan analisa), Apotek, Aktivitas, dan Praktik.'
-            }
-          ]
-        }
+        { id: 'subj-mtk', name: 'Matematika', icon: '📐', description: 'Mempelajari bilangan berpangkat, bentuk akar, logaritma, barisan dan deret, serta konsep dasar aljabar. Siswa dilatih menyelesaikan masalah kontekstual dan mengembangkan penalaran logis, kritis, serta sistematis.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] },
+        { id: 'subj-indo', name: 'Bahasa Indonesia', icon: '📖', description: 'Mempelajari teks laporan hasil observasi, teks anekdot, hikayat, serta keterampilan menyimak, membaca, berbicara, dan menulis. Siswa berlatih memahami struktur dan kaidah kebahasaan, menyampaikan gagasan, serta menghasilkan teks secara kritis dan kreatif.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] },
+        { id: 'subj-inggris', name: 'Bahasa Inggris', icon: '🇬🇧', description: 'Mempelajari komunikasi lisan dan tulisan melalui ungkapan perkenalan, deskripsi orang/tempat/benda, recount dan teks fungsional sederhana, kosakata, serta tata bahasa sesuai konteks. Siswa berlatih menyimak, berbicara, membaca, dan menulis untuk kebutuhan sehari-hari.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] },
+        { id: 'subj-seni-tari', name: 'Seni Tari', icon: '💃', description: 'Mempelajari unsur dan prinsip gerak tari, ruang, waktu, tenaga, pola lantai, iringan, ekspresi, serta ragam tari tradisional. Siswa mengapresiasi karya tari dan mengeksplorasi, menyusun, serta memperagakan gerak tari sederhana.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] },
+        { id: 'subj-sejarah', name: 'Sejarah', icon: '🏛️', description: 'Mempelajari konsep dasar sejarah, manusia dan ruang, kronologi, periodisasi, sumber sejarah, metode penelitian sejarah, serta kehidupan masyarakat praaksara dan perkembangan peradaban. Siswa mengembangkan kesadaran sejarah melalui analisis sumber dan peristiwa.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] },
+        { id: 'subj-agama', name: 'Pendidikan Agama', icon: '📗', description: 'Mempelajari ajaran pokok agama sesuai keyakinan peserta didik, meliputi keimanan, ibadah, kitab suci, akhlak atau budi pekerti, serta penerapannya dalam kehidupan. Pembelajaran menumbuhkan sikap taat, toleran, bertanggung jawab, dan menghormati sesama.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] },
+        { id: 'subj-pjok', name: 'Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK)', icon: '⚽', description: 'Mempelajari keterampilan gerak dan permainan olahraga, aktivitas atletik dan kebugaran jasmani, senam atau aktivitas gerak berirama, serta perilaku hidup sehat. Siswa mengembangkan kebugaran, keselamatan, kerja sama, dan sportivitas.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] },
+        { id: 'subj-pancasila', name: 'Pendidikan Pancasila', icon: '⚖️', description: 'Mempelajari Pancasila sebagai dasar negara dan pandangan hidup, proses perumusannya, konstitusi dan norma, hak serta kewajiban warga negara, Bhinneka Tunggal Ika, dan komitmen menjaga NKRI. Siswa menerapkan nilai demokrasi, keadilan, dan gotong royong.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] },
+        { id: 'subj-coding', name: 'Coding (Pemrograman Dasar)', icon: '⌨️', description: 'Mempelajari berpikir komputasional, algoritma, flowchart, pseudocode, variabel, tipe data, operator, percabangan, dan perulangan. Siswa berlatih merancang, menulis, menguji, serta memperbaiki program sederhana untuk menyelesaikan masalah.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] },
+        { id: 'subj-ipas', name: 'IPAS', icon: '🌍', description: 'Mempelajari fenomena alam dan sosial melalui pengamatan dan metode ilmiah, mencakup pengukuran, materi dan perubahannya, energi, makhluk hidup dan lingkungan, serta interaksi manusia dengan ruang dan masyarakat. Siswa mengolah informasi dan menarik kesimpulan berbasis bukti.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] },
+        { id: 'subj-tjkt', name: 'Dasar-Dasar Teknik Komputer dan Jaringan', icon: '🛜', description: 'Mempelajari proses bisnis dan perkembangan teknologi di bidang TJKT, peluang kerja dan kewirausahaan, budaya kerja industri, K3LH, perangkat keras dan perangkat lunak komputer, dasar sistem komputer, serta konsep dasar jaringan dan telekomunikasi. Siswa mengenali perangkat dan menerapkan prosedur kerja yang aman.', semester: '1', quizTimeLimit: 0, isActive: true, hiddenFromStudents: false, materials: [], modules: [], questions: [] }
       ],
       students: [],
       teachers: [],
@@ -3742,12 +3779,14 @@ Bentuk soal dipilih sebelum deteksi. Periksa kembali kunci dan hasil deteksi seb
         <form onsubmit="saveSubjectForm(event, '${subjectId || ''}')" class="space-y-4">
           <div>
             <div class="flex items-center justify-between mb-1.5">
-              <label class="block text-xs font-bold t-text-main">Pilih Ikon Mata Pelajaran (25 Pilihan)</label>
+              <label class="block text-xs font-bold t-text-main">Pilih Ikon Mata Pelajaran (150 Pilihan)</label>
               <span id="modalSelectedIconBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full t-badge-primary">
                 ${selectedModalSubjectIcon} ${escapeHTML(initialLabel)}
               </span>
             </div>
-            <div class="grid grid-cols-5 gap-2 max-h-52 overflow-y-auto p-1.5 t-bg-secondary rounded-2xl border t-border">
+            <input id="subjectIconSearch" type="search" oninput="filterSubjectIcons(this.value)" placeholder="Cari ikon: matematika, komputer, tari..." class="t-input w-full px-3 py-2 text-sm mb-2" aria-label="Cari ikon mata pelajaran" />
+            <p id="subjectIconCount" class="text-[11px] t-text-muted mb-2">150 ikon tersedia</p>
+            <div id="subjectIconGrid" class="grid grid-cols-5 sm:grid-cols-6 gap-2 max-h-64 overflow-y-auto p-1.5 t-bg-secondary rounded-2xl border t-border">
               ${SUBJECT_ICONS.map(ic => {
                 const isSel = ic.emoji === selectedModalSubjectIcon;
                 return `
@@ -3755,6 +3794,7 @@ Bentuk soal dipilih sebelum deteksi. Periksa kembali kunci dan hasil deteksi seb
                     type="button"
                     onclick="selectModalSubjectIcon('${ic.emoji}', '${escapeHTML(ic.label)}')"
                     data-subj-icon-btn="${ic.emoji}"
+                    data-subj-icon-label="${escapeHTML(ic.label.toLowerCase())}"
                     class="avatar-option p-2 flex flex-col items-center justify-center gap-1 ${isSel ? 'selected' : ''}"
                     title="${escapeHTML(ic.label)}"
                   >
@@ -3781,6 +3821,20 @@ Bentuk soal dipilih sebelum deteksi. Periksa kembali kunci dan hasil deteksi seb
           </div>
         </form>
       `);
+    }
+
+    function filterSubjectIcons(query = '') {
+      const q = String(query || '').trim().toLowerCase();
+      const buttons = [...document.querySelectorAll('[data-subj-icon-btn]')];
+      let visible = 0;
+      buttons.forEach(btn => {
+        const label = btn.getAttribute('data-subj-icon-label') || '';
+        const match = !q || label.includes(q) || btn.getAttribute('data-subj-icon-btn').includes(q);
+        btn.hidden = !match;
+        if (match) visible++;
+      });
+      const count = document.getElementById('subjectIconCount');
+      if (count) count.textContent = `${visible} dari ${buttons.length} ikon ditampilkan`;
     }
 
     function selectModalSubjectIcon(emoji, label) {
