@@ -1,0 +1,19 @@
+EDUSTUDY - PEMBARUAN TEKS DASHBOARD SISWA
+
+Perubahan:
+- Menghapus teks literal template JavaScript yang sebelumnya tampil sebagai ${...}.
+- Menampilkan kelas dan semester melalui elemen HTML khusus.
+- Mengisi kelas dan semester secara dinamis saat dashboard siswa dirender.
+- Memperbaiki teks menjadi: "Kelas [kelas] · Semester [semester] Pilih mata pelajaran untuk mulai belajar."
+
+Pemasangan:
+1. Backup index.html lama di GitHub.
+2. Ganti file index.html di root repository dengan file index.html dari paket ini.
+3. Commit perubahan ke branch utama.
+4. Tunggu deployment Vercel berstatus Ready.
+5. Hard refresh website (Ctrl+Shift+R).
+
+Catatan:
+- File ini hanya memperbaiki teks header dashboard siswa dari revisi sebelumnya.
+- Tidak mengubah konfigurasi Firebase atau data database.
+- Uji di website setelah deployment.
