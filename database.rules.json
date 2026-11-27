@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "edustudy": {
+      "database": {
+        ".read": "auth != null",
+        ".write": "auth != null && root.child('edustudy/teacherAccess').child(auth.uid).val() === true"
+      },
+      "studentProfiles": {
+        ".read": "auth != null && root.child('edustudy/teacherAccess').child(auth.uid).val() === true",
+        "$uid": {
+          ".read": "auth != null && (auth.uid === $uid || root.child('edustudy/teacherAccess').child(auth.uid).val() === true)",
+          ".write": "auth != null && (auth.uid === $uid || root.child('edustudy/teacherAccess').child(auth.uid).val() === true)"
+        }
+      },
+      "teacherAccess": {
+        "$uid": {
+          ".read": "auth != null && auth.uid === $uid",
+          ".write": false
+        }
+      }
+    }
+  }
+}
