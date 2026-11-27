@@ -1,0 +1,32 @@
+EDUSTUDY — REVISI NAVIGASI SISWA & KALENDER GURU/SISWA
+
+ISI REVISI
+1. Dashboard siswa memiliki lima halaman navigasi: Home, Pelajaran, Latihan, Jadwal, dan Nilai Saya.
+2. Navigasi siswa memakai desain rounded glass/liquid ringan. Tombol Latihan lebih menonjol di tengah.
+3. Halaman Pelajaran menampilkan daftar mata pelajaran untuk membuka materi/modul.
+4. Halaman Latihan menampilkan mata pelajaran yang memiliki soal. Saat dipilih, siswa masuk ke tampilan pengerjaan soal.
+5. Kalender siswa dan guru mencakup Januari 2026 sampai Desember 2029.
+6. Guru dapat menambah, mengedit, menghapus jadwal, memberi catatan, dan memilih warna.
+7. Jadwal disimpan pada edustudy/database/calendarEvents sehingga dapat dibaca seluruh siswa melalui sinkronisasi database bersama.
+
+CARA PEMASANGAN
+1. Backup index.html yang saat ini ada di GitHub.
+2. Unduh index.html dari paket ini.
+3. Ganti file index.html pada folder utama repository GitHub.
+4. Commit changes ke branch yang terhubung ke Vercel.
+5. Tunggu deployment Vercel berstatus Ready.
+6. Buka website, lakukan hard refresh, lalu uji login guru dan siswa.
+
+FIREBASE
+- Kalender menggunakan node edustudy/database/calendarEvents.
+- Dengan struktur Rules yang sebelumnya dibahas, guru memiliki izin tulis pada edustudy/database dan pengguna yang login memiliki izin baca. Karena itu tidak perlu menambahkan node Rules baru untuk kalender selama Rules tersebut masih berlaku.
+- Jangan menghapus data Firebase lama.
+
+PENGUJIAN YANG DISARANKAN
+1. Login sebagai guru, buka menu Jadwal, buat jadwal untuk tanggal tertentu antara 2026-01-01 dan 2029-12-31, pilih warna, lalu simpan.
+2. Login sebagai siswa pada browser/perangkat lain, buka Jadwal, pilih tanggal yang sama dan pastikan jadwal terlihat.
+3. Uji edit dan hapus jadwal dari akun guru.
+4. Uji semua lima menu siswa pada desktop dan HP.
+
+CATATAN
+Pemeriksaan sintaks JavaScript dan struktur ID HTML dilakukan. Koneksi Firebase, tampilan lintas perangkat, serta deployment Vercel perlu diuji langsung setelah file dipasang.
