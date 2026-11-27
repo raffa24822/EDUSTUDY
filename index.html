@@ -1170,20 +1170,22 @@
         </div>
         <div id="teacherAiMapelPanel" class="hidden t-card p-5 sm:p-6 space-y-4">
           <h3 class="text-lg font-extrabold t-text-main">Mapel AI</h3>
-          <p class="text-xs t-text-muted">Isi spesifikasi mapel. Form ini menyiapkan instruksi terstruktur untuk AI; pembuatan otomatis langsung di website memerlukan endpoint AI server-side dan API key yang disimpan di Vercel, bukan di browser.</p>
+          <p class="text-xs t-text-muted">Isi data mapel. Sistem membaca kolom, memeriksa kelengkapan, dan menampilkan pratinjau sebelum mapel ditambahkan. Analisis generatif oleh model AI memerlukan endpoint AI server-side.</p>
           <form id="aiMapelForm" onsubmit="prepareAiMapelPrompt(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <label class="text-sm font-semibold t-text-secondary sm:col-span-2">Nama mata pelajaran<input id="aiMapelName" required class="t-input w-full p-3 mt-1" placeholder="Contoh: Dasar-Dasar Kejuruan"></label>
+            <label class="text-sm font-semibold t-text-secondary">Ikon mata pelajaran<select id="aiMapelIcon" class="t-input w-full p-3 mt-1"><option value="📘">📘 Buku</option><option value="📐">📐 Matematika</option><option value="🔬">🔬 Sains</option><option value="🌍">🌍 Geografi</option><option value="📖">📖 Bahasa</option><option value="💻">💻 Teknologi</option><option value="🎨">🎨 Seni</option><option value="⚙️">⚙️ Kejuruan</option><option value="🧪">🧪 Praktikum</option><option value="🏛️">🏛️ Sejarah</option><option value="🗣️">🗣️ Bahasa Asing</option><option value="🧮">🧮 Akuntansi</option></select></label>
+            <label class="text-sm font-semibold t-text-secondary">Nama mata pelajaran<input id="aiMapelName" required class="t-input w-full p-3 mt-1" placeholder="Contoh: Dasar-Dasar Kejuruan"></label>
             <label class="text-sm font-semibold t-text-secondary">Semester<select id="aiMapelSemester" class="t-input w-full p-3 mt-1"><option value="1">Semester 1</option><option value="2">Semester 2</option><option value="both">Semester 1 & 2</option></select></label>
             <label class="text-sm font-semibold t-text-secondary">Waktu pengerjaan soal (menit)<input id="aiMapelTime" type="number" min="1" max="300" value="30" class="t-input w-full p-3 mt-1"></label>
             <label class="text-sm font-semibold t-text-secondary sm:col-span-2">Deskripsi singkat<textarea id="aiMapelDescription" rows="3" required class="t-input w-full p-3 mt-1" placeholder="Jelaskan cakupan dan tujuan mata pelajaran..."></textarea></label>
-            <button class="t-btn-primary rounded-xl p-3 font-bold sm:col-span-2" type="submit">Siapkan instruksi AI Mapel</button>
+            <button class="t-btn-primary rounded-xl p-3 font-bold sm:col-span-2" type="submit">Analisis & Pratinjau Mapel</button>
           </form>
-          <textarea id="aiMapelPromptOutput" rows="5" readonly class="t-input w-full p-3 text-xs" placeholder="Instruksi AI akan muncul di sini..."></textarea>
-          <div class="flex flex-wrap gap-2"><button type="button" onclick="copyAiPrompt('aiMapelPromptOutput')" class="t-btn-secondary rounded-xl px-4 py-2 text-sm font-bold">Salin instruksi</button><button type="button" onclick="saveAiMapelDraft()" class="t-btn-primary rounded-xl px-4 py-2 text-sm font-bold">Simpan sebagai mapel</button></div>
+          <div id="aiMapelPreview" class="hidden t-card p-4 space-y-2" aria-live="polite"></div>
+          <textarea id="aiMapelPromptOutput" rows="5" readonly class="t-input w-full p-3 text-xs" placeholder="Ringkasan analisis akan muncul di sini..."></textarea>
+          <div class="flex flex-wrap gap-2"><button type="button" onclick="copyAiPrompt('aiMapelPromptOutput')" class="t-btn-secondary rounded-xl px-4 py-2 text-sm font-bold">Salin instruksi</button><button type="button" onclick="saveAiMapelDraft()" class="t-btn-primary rounded-xl px-4 py-2 text-sm font-bold">Tambahkan Mapel ke EDUSTUDY</button></div>
         </div>
         <div id="teacherAiMateriPanel" class="hidden t-card p-5 sm:p-6 space-y-4">
           <h3 class="text-lg font-extrabold t-text-main">Materi AI</h3>
-          <p class="text-xs t-text-muted">Pilih mapel tujuan dan format materi. File akan dipilih oleh guru; upload permanen memerlukan Firebase Storage Rules yang mengizinkan guru.</p>
+          <p class="text-xs t-text-muted">Pilih mapel tujuan, isi modul, lalu tinjau susunan konten sebelum menambahkannya. Analisis generatif memerlukan endpoint AI; file dokumen/foto memerlukan Firebase Storage untuk dibagikan kepada siswa.</p>
           <form id="aiMateriForm" onsubmit="prepareAiMateriPrompt(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <label class="text-sm font-semibold t-text-secondary sm:col-span-2">Mapel tujuan<select id="aiMateriSubject" required class="t-input w-full p-3 mt-1"></select></label>
             <label class="text-sm font-semibold t-text-secondary sm:col-span-2">Judul cover modul<input id="aiMateriTitle" required class="t-input w-full p-3 mt-1" placeholder="Judul modul"></label>
@@ -1193,10 +1195,11 @@
             <div id="aiMateriTextWrap" class="sm:col-span-2"><label class="text-sm font-semibold t-text-secondary">Isi materi<textarea id="aiMateriText" rows="7" class="t-input w-full p-3 mt-1" placeholder="Tulis atau tempel materi di sini..."></textarea></label></div>
             <div id="aiMateriFileWrap" class="hidden sm:col-span-2"><label class="text-sm font-semibold t-text-secondary">Upload dokumen/foto<input id="aiMateriFile" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.png,.jpg,.jpeg,.webp" class="t-input w-full p-3 mt-1"></label><p class="text-xs t-text-muted mt-1">File dipilih lokal; agar dapat dibagikan ke siswa, perlu diunggah ke Firebase Storage.</p></div>
             <div id="aiMateriLinkWrap" class="hidden sm:col-span-2"><label class="text-sm font-semibold t-text-secondary">Tautan materi<input id="aiMateriLink" type="url" class="t-input w-full p-3 mt-1" placeholder="https://..."></label></div>
-            <button class="t-btn-primary rounded-xl p-3 font-bold sm:col-span-2" type="submit">Siapkan instruksi AI Materi</button>
+            <button class="t-btn-primary rounded-xl p-3 font-bold sm:col-span-2" type="submit">Analisis & Pratinjau Modul</button>
           </form>
-          <textarea id="aiMateriPromptOutput" rows="5" readonly class="t-input w-full p-3 text-xs" placeholder="Instruksi AI akan muncul di sini..."></textarea>
-          <div class="flex flex-wrap gap-2"><button type="button" onclick="copyAiPrompt('aiMateriPromptOutput')" class="t-btn-secondary rounded-xl px-4 py-2 text-sm font-bold">Salin instruksi</button><button type="button" onclick="saveAiMateriDraft()" class="t-btn-primary rounded-xl px-4 py-2 text-sm font-bold">Simpan modul</button></div>
+          <div id="aiMateriPreview" class="hidden t-card p-4 space-y-3" aria-live="polite"></div>
+          <textarea id="aiMateriPromptOutput" rows="5" readonly class="t-input w-full p-3 text-xs" placeholder="Ringkasan analisis dan susunan modul akan muncul di sini..."></textarea>
+          <div class="flex flex-wrap gap-2"><button type="button" onclick="copyAiPrompt('aiMateriPromptOutput')" class="t-btn-secondary rounded-xl px-4 py-2 text-sm font-bold">Salin instruksi</button><button type="button" onclick="saveAiMateriDraft()" class="t-btn-primary rounded-xl px-4 py-2 text-sm font-bold">Tambahkan Modul ke Mapel Terpilih</button></div>
         </div>
         <div id="teacherAiSoalPanel" class="space-y-5">
         <div class="t-card p-5 sm:p-6">
@@ -3876,25 +3879,100 @@ Bentuk soal dipilih sebelum deteksi. Periksa kembali kunci dan hasil deteksi seb
     }
     function populateAiMateriSubjects(){const el=document.getElementById('aiMateriSubject');if(!el)return;const old=el.value;el.innerHTML=(appDB.subjects||[]).map(s=>`<option value="${escapeHTML(s.id)}">${escapeHTML(s.name)}</option>`).join('')||'<option value="">Buat mapel terlebih dahulu</option>';if((appDB.subjects||[]).some(s=>s.id===old))el.value=old;}
     function updateAiMateriInput(){const type=document.getElementById('aiMateriType')?.value;document.getElementById('aiMateriTextWrap')?.classList.toggle('hidden',type!=='text');document.getElementById('aiMateriFileWrap')?.classList.toggle('hidden',!['document','image'].includes(type));document.getElementById('aiMateriLinkWrap')?.classList.toggle('hidden',type!=='link');const f=document.getElementById('aiMateriFile');if(f)f.accept=type==='image'?'.png,.jpg,.jpeg,.webp':' .pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx';}
-    function prepareAiMapelPrompt(e){e.preventDefault();const name=document.getElementById('aiMapelName').value.trim(),semester=document.getElementById('aiMapelSemester').value,desc=document.getElementById('aiMapelDescription').value.trim(),time=document.getElementById('aiMapelTime').value;document.getElementById('aiMapelPromptOutput').value=`Buat rancangan mata pelajaran untuk EDUSTUDY dengan format:
-Nama mata pelajaran: ${name}
-Semester: ${semester}
-Deskripsi singkat: ${desc}
-Waktu pengerjaan soal: ${time} menit
+    let aiMapelPreviewReady = false;
+    let aiMateriPreviewReady = false;
 
-Hasilkan tujuan pembelajaran, cakupan topik, dan rancangan aktivitas yang sesuai. Jangan mengarang standar kurikulum spesifik yang tidak disebutkan.`;showToast('Instruksi Mapel AI sudah disiapkan. Hubungkan ke layanan AI untuk menghasilkan konten otomatis.','info');}
-    function prepareAiMateriPrompt(e){e.preventDefault();const subj=appDB.subjects.find(s=>s.id===document.getElementById('aiMateriSubject').value);const title=document.getElementById('aiMateriTitle').value.trim(),desc=document.getElementById('aiMateriDescription').value.trim(),sem=document.getElementById('aiMateriSemester').value,type=document.getElementById('aiMateriType').value;let source=type==='text'?document.getElementById('aiMateriText').value:type==='link'?document.getElementById('aiMateriLink').value:(document.getElementById('aiMateriFile').files[0]?.name||'Belum ada file dipilih');document.getElementById('aiMateriPromptOutput').value=`Buat modul pembelajaran EDUSTUDY.
-Judul cover modul: ${title}
-Deskripsi modul: ${desc}
-Mapel: ${subj?.name||'Belum dipilih'}
-Semester akses: ${sem}
-Bentuk materi: ${type}
-Sumber/isi: ${source}
+    function prepareAiMapelPrompt(e){
+      e.preventDefault();
+      const name=document.getElementById('aiMapelName').value.trim();
+      const semester=document.getElementById('aiMapelSemester').value;
+      const desc=document.getElementById('aiMapelDescription').value.trim();
+      const time=Number(document.getElementById('aiMapelTime').value)||30;
+      const icon=document.getElementById('aiMapelIcon')?.value||'📘';
+      if(!name||!desc){showToast('Lengkapi nama dan deskripsi mata pelajaran.','warning');return;}
+      if((appDB.subjects||[]).some(x=>String(x.name||'').trim().toLowerCase()===name.toLowerCase())){
+        showToast('Nama mata pelajaran sudah tersedia. Periksa daftar mapel agar tidak membuat duplikat.','warning');return;
+      }
+      const semesterLabel=semester==='both'?'Semester 1 & 2':'Semester '+semester;
+      document.getElementById('aiMapelPromptOutput').value=`Rancangan Mapel EDUSTUDY\nIkon: ${icon}\nNama mata pelajaran: ${name}\nSemester: ${semesterLabel}\nWaktu pengerjaan soal: ${time} menit\nDeskripsi: ${desc}\n\nPemeriksaan: nama, ikon, semester, durasi, dan deskripsi telah dibaca. Periksa kartu pratinjau sebelum menambahkan.`;
+      const preview=document.getElementById('aiMapelPreview');
+      preview.innerHTML=`<div class="flex items-center gap-3"><div class="w-14 h-14 rounded-2xl t-badge-primary flex items-center justify-center text-3xl">${escapeHTML(icon)}</div><div class="min-w-0"><div class="text-xs font-bold t-text-muted">PRATINJAU KARTU MAPEL</div><h4 class="font-extrabold text-lg t-text-main">${escapeHTML(name)}</h4><p class="text-xs t-text-muted">${escapeHTML(semesterLabel)} · ${time} menit</p></div></div><p class="text-sm t-text-secondary">${escapeHTML(desc)}</p><p class="text-xs t-text-muted">Mapel akan ditambahkan ke Kelola Mapel & Materi setelah tombol konfirmasi ditekan.</p>`;
+      preview.classList.remove('hidden');
+      aiMapelPreviewReady=true;
+      showToast('Informasi mapel berhasil dibaca. Periksa pratinjau, lalu tambahkan.','success');
+    }
 
-Susun materi terstruktur dengan subjudul, tujuan pembelajaran, penjelasan, dan rangkuman. Pertahankan fakta dari sumber dan tandai informasi yang perlu diverifikasi.`;showToast('Instruksi Materi AI sudah disiapkan. Pembuatan otomatis memerlukan layanan AI server-side.','info');}
-    function copyAiPrompt(id){const v=document.getElementById(id)?.value||'';if(!v){showToast('Buat instruksi terlebih dahulu.','warning');return;}navigator.clipboard?.writeText(v).then(()=>showToast('Instruksi berhasil disalin.','success')).catch(()=>showToast('Clipboard tidak tersedia di browser ini.','warning'));}
-    function saveAiMapelDraft(){const name=document.getElementById('aiMapelName').value.trim();if(!name){showToast('Isi nama mata pelajaran.','warning');return;}const item={id:'subj-ai-'+Date.now(),name,icon:'📘',description:document.getElementById('aiMapelDescription').value.trim(),semester:document.getElementById('aiMapelSemester').value,questionTime:Number(document.getElementById('aiMapelTime').value)||30,materials:[],modules:[],questions:[]};appDB.subjects.push(item);saveDB();renderTeacherSubjectsManager();populateAiMateriSubjects();showToast('Mapel tersimpan sebagai draft. Lengkapi kontennya sebelum dibagikan.','success');}
-    function saveAiMateriDraft(){const sid=document.getElementById('aiMateriSubject').value,subj=appDB.subjects.find(s=>s.id===sid);if(!subj){showToast('Pilih mapel tujuan terlebih dahulu.','warning');return;}const type=document.getElementById('aiMateriType').value,title=document.getElementById('aiMateriTitle').value.trim(),desc=document.getElementById('aiMateriDescription').value.trim();if(!title){showToast('Judul modul wajib diisi.','warning');return;}if(type==='document'||type==='image'){const file=document.getElementById('aiMateriFile').files[0];if(!file){showToast('Pilih file terlebih dahulu. File belum diunggah ke Firebase Storage.','warning');return;}showToast('File sudah dipilih, tetapi belum dapat dibagikan sebelum Firebase Storage diaktifkan dan dihubungkan.','warning');return;}if(type==='link'&&!document.getElementById('aiMateriLink').value.trim()){showToast('Masukkan tautan materi.','warning');return;}const section={heading:title,content:type==='text'?document.getElementById('aiMateriText').value.trim():document.getElementById('aiMateriLink').value.trim(),type,description:desc};subj.modules=subj.modules||[];subj.modules.push({id:'mod-ai-'+Date.now(),title,description:desc,semester:document.getElementById('aiMateriSemester').value,sections:[section]});saveDB();renderTeacherSubjectsManager();showToast('Modul materi tersimpan pada mapel tujuan.','success');}
+    function prepareAiMateriPrompt(e){
+      e.preventDefault();
+      const subj=(appDB.subjects||[]).find(s=>s.id===document.getElementById('aiMateriSubject').value);
+      const title=document.getElementById('aiMateriTitle').value.trim();
+      const desc=document.getElementById('aiMateriDescription').value.trim();
+      const sem=document.getElementById('aiMateriSemester').value;
+      const type=document.getElementById('aiMateriType').value;
+      const file=document.getElementById('aiMateriFile')?.files?.[0];
+      const textContent=document.getElementById('aiMateriText')?.value.trim()||'';
+      const link=document.getElementById('aiMateriLink')?.value.trim()||'';
+      if(!subj){showToast('Pilih mapel tujuan terlebih dahulu.','warning');return;}
+      if(!title){showToast('Judul modul wajib diisi.','warning');return;}
+      if(type==='text'&&!textContent){showToast('Isi materi teks terlebih dahulu.','warning');return;}
+      if(type==='link'&&!link){showToast('Masukkan tautan materi terlebih dahulu.','warning');return;}
+      if(['document','image'].includes(type)&&!file){showToast('Silakan unggah dokumen atau gambar pada kolom file.','warning');return;}
+      const semesterLabel=sem==='both'?'Semester 1 & 2':'Semester '+sem;
+      const sourceLabel=type==='text'?`${textContent.length} karakter teks`:type==='link'?link:file.name;
+      const prompt=`Susunan modul EDUSTUDY\nMapel tujuan: ${subj.name}\nJudul Modul: ${title}\nDeskripsi Modul: ${desc}\nSemester akses: ${semesterLabel}\nBentuk materi: ${type}\nIsi materi/sumber: ${sourceLabel}\n\nTugas analisis: identifikasi bagian judul, deskripsi, semester, tipe konten, dan isi. Pertahankan isi asli guru. Jangan menambahkan fakta yang tidak diberikan. Sarankan pembagian subbagian berdasarkan heading/paragraf yang sudah ada.`;
+      document.getElementById('aiMateriPromptOutput').value=prompt;
+      let contentPreview='';
+      if(type==='text'){
+        const chunks=textContent.split(/\n(?=\s*(?:#{1,3}\s|\d+[.)]\s|[A-Z][^\n]{2,60}:))/).filter(Boolean);
+        contentPreview=chunks.map((part,i)=>`<div class="rounded-xl border t-border p-3"><div class="text-xs font-bold t-text-muted mb-1">BAGIAN ${i+1}</div><div class="text-sm t-text-main whitespace-pre-wrap">${escapeHTML(part.slice(0,1800))}${part.length>1800?'…':''}</div></div>`).join('');
+      } else if(type==='link'){
+        contentPreview=`<a class="text-blue-600 underline break-all" href="${escapeHTML(link)}" target="_blank" rel="noopener noreferrer">${escapeHTML(link)}</a>`;
+      } else {
+        contentPreview=`<div class="rounded-xl border t-border p-3 flex items-center gap-3"><i class="ph-fill ${type==='image'?'ph-image':'ph-file-doc'} text-3xl t-text-secondary"></i><div><div class="font-bold text-sm t-text-main">${escapeHTML(file.name)}</div><div class="text-xs t-text-muted">${(file.size/1024/1024).toFixed(2)} MB · File terpilih, belum diunggah ke penyimpanan cloud</div></div></div>`;
+      }
+      const preview=document.getElementById('aiMateriPreview');
+      preview.innerHTML=`<div class="flex flex-wrap items-start justify-between gap-2"><div><div class="text-xs font-bold t-text-muted">PRATINJAU MODUL</div><h4 class="text-lg font-extrabold t-text-main">${escapeHTML(title)}</h4><p class="text-xs t-text-muted">${escapeHTML(subj.name)} · ${escapeHTML(semesterLabel)}</p></div><span class="px-3 py-1 rounded-full t-badge-primary text-xs font-bold">${escapeHTML(type.toUpperCase())}</span></div><p class="text-sm t-text-secondary">${escapeHTML(desc||'Tidak ada deskripsi.')}</p><div class="space-y-2"><div class="text-xs font-bold t-text-muted">URUTAN ISI</div>${contentPreview}</div><p class="text-xs t-text-muted">Periksa penempatan dan urutan konten. Modul baru disimpan setelah tombol Tambahkan Modul ditekan.</p>`;
+      preview.classList.remove('hidden');
+      aiMateriPreviewReady=true;
+      showToast('Struktur modul berhasil dibaca. Periksa pratinjau sebelum menyimpan.','success');
+    }
+
+    function copyAiPrompt(id){const v=document.getElementById(id)?.value||'';if(!v){showToast('Buat pratinjau terlebih dahulu.','warning');return;}navigator.clipboard?.writeText(v).then(()=>showToast('Ringkasan berhasil disalin.','success')).catch(()=>showToast('Clipboard tidak tersedia di browser ini.','warning'));}
+
+    function saveAiMapelDraft(){
+      if(!aiMapelPreviewReady){showToast('Klik Analisis & Pratinjau Mapel terlebih dahulu.','warning');return;}
+      const name=document.getElementById('aiMapelName').value.trim();
+      const icon=document.getElementById('aiMapelIcon')?.value||'📘';
+      const item={id:'subj-ai-'+Date.now(),name,icon,description:document.getElementById('aiMapelDescription').value.trim(),semester:document.getElementById('aiMapelSemester').value,questionTime:Number(document.getElementById('aiMapelTime').value)||30,materials:[],modules:[],questions:[]};
+      appDB.subjects=appDB.subjects||[];appDB.subjects.push(item);saveDB();renderTeacherSubjectsManager();populateAiMateriSubjects();
+      aiMapelPreviewReady=false;document.getElementById('aiMapelPreview')?.classList.add('hidden');
+      showToast('Mata pelajaran berhasil ditambahkan ke Kelola Mapel & Materi.','success');
+    }
+
+    function saveAiMateriDraft(){
+      if(!aiMateriPreviewReady){showToast('Klik Analisis & Pratinjau Modul terlebih dahulu.','warning');return;}
+      const sid=document.getElementById('aiMateriSubject').value;
+      const subj=(appDB.subjects||[]).find(s=>s.id===sid);
+      if(!subj){showToast('Pilih mapel tujuan terlebih dahulu.','warning');return;}
+      const type=document.getElementById('aiMateriType').value;
+      const title=document.getElementById('aiMateriTitle').value.trim();
+      const desc=document.getElementById('aiMateriDescription').value.trim();
+      const sem=document.getElementById('aiMateriSemester').value;
+      const file=document.getElementById('aiMateriFile')?.files?.[0];
+      if(['document','image'].includes(type)){
+        if(!file){showToast('Pilih file terlebih dahulu.','warning');return;}
+        showToast('Pratinjau file berhasil dibuat, tetapi publikasi file memerlukan Firebase Storage. File belum disimpan ke cloud.','warning');return;
+      }
+      const content=type==='text'?document.getElementById('aiMateriText').value.trim():document.getElementById('aiMateriLink').value.trim();
+      if(!content){showToast('Isi materi belum tersedia.','warning');return;}
+      const section={heading:title,content,type,description:desc};
+      subj.modules=subj.modules||[];
+      subj.modules.push({id:'mod-ai-'+Date.now(),title,description:desc,semester:sem,sections:[section],createdAt:new Date().toISOString()});
+      saveDB();renderTeacherSubjectsManager();
+      aiMateriPreviewReady=false;document.getElementById('aiMateriPreview')?.classList.add('hidden');
+      showToast('Modul berhasil ditambahkan ke mapel '+subj.name+'.','success');
+    }
+
 
     function runAiSoalDetection() {
       const rawText = (document.getElementById('aiRawSoalInput')?.value || '').trim();
