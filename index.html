@@ -686,6 +686,180 @@
       .tch-home-menu-icon{width:54px;height:54px;font-size:1.45rem}
     }
 
+
+
+    /* Final home refinement: compact greeting, concise menu, layered content, bottom-sheet menu */
+    .tch-home-greeting-simple{padding:2px 2px 4px;min-width:0}
+    .tch-home-greeting-simple h2{letter-spacing:-.025em;line-height:1.2}
+    .tch-home-greeting{background:transparent;border:0;box-shadow:none}
+    .tch-home-menu-compact{background:rgba(255,255,255,.94);border:1px solid var(--border-color);box-shadow:0 10px 24px rgba(148,163,184,.09)}
+    .tch-home-menu-card--compact{min-height:108px;padding:12px 8px!important}
+    .tch-home-menu-card--compact .tch-home-menu-icon{width:46px;height:46px;border-radius:15px;font-size:1.25rem}
+    .tch-home-layered-wrap{position:relative;padding:0 7px 8px 0;border-radius:28px;background:linear-gradient(135deg,rgba(37,99,235,.10),rgba(148,163,184,.12));}
+    .tch-home-layered-wrap:before{content:"";position:absolute;inset:7px 0 0 7px;border-radius:26px;background:rgba(37,99,235,.045);pointer-events:none}
+    .tch-home-layered-wrap #teacherHomeSchedulePreview,.tch-home-layered-wrap #teacherHomeAnnouncementPreview{position:relative;z-index:1;padding:0}
+    .tch-home-layered-wrap .tch-home-list-card{box-shadow:0 8px 18px rgba(15,23,42,.055);border-radius:23px}
+    .tch-home-tip{background:linear-gradient(110deg,rgba(219,234,254,.65),rgba(255,255,255,.95));border:1px solid var(--border-color)}
+    .tch-home-tip-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex:none;border-radius:14px;background:rgba(37,99,235,.10);color:var(--primary);font-size:1.25rem}
+    .tch-home-more-modal{align-items:flex-end;justify-content:center;padding:0;background:rgba(15,23,42,.38);opacity:0;transition:opacity .22s ease}
+    .tch-home-more-modal.open{display:flex;opacity:1}
+    .tch-home-more-panel{width:min(720px,100%);max-height:min(82vh,720px);border-radius:28px 28px 0 0;padding:22px 18px calc(22px + env(safe-area-inset-bottom));transform:translateY(28px);opacity:.96;transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .22s ease}
+    .tch-home-more-modal.open .tch-home-more-panel{transform:translateY(0);opacity:1}
+    .tch-home-more-panel:before{content:"";display:block;width:42px;height:5px;border-radius:99px;background:rgba(100,116,139,.28);margin:-8px auto 17px}
+    @media(min-width:768px){
+      .tch-home-more-modal{align-items:center;padding:18px}
+      .tch-home-more-panel{border-radius:28px;transform:translateY(12px)}
+      .tch-home-more-modal.open .tch-home-more-panel{transform:translateY(0)}
+    }
+    @media(max-width:640px){
+      #tchTabHome .tch-home-blue-card{padding:1.1rem;border-radius:24px}
+      #tchTabHome .tch-home-stat-mini{padding:.9rem}
+      #tchTabHome .tch-home-menu-card--compact{min-height:100px}
+      #tchTabHome .tch-home-menu-card--compact .tch-home-menu-icon{width:42px;height:42px}
+      #tchTabHome .tch-home-section-title{font-size:1.05rem}
+    }
+
+
+    /* Revisi modal More Menu: berada di atas navigasi, tidak tertutup taskbar */
+    .tch-home-more-modal{
+      z-index:9999 !important;
+      align-items:center !important;
+      justify-content:center !important;
+      padding:16px !important;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .tch-home-more-panel{
+      width:min(620px, calc(100vw - 32px)) !important;
+      max-height:min(72vh, 620px) !important;
+      overflow-x:hidden !important;
+      overflow-y:auto !important;
+      overscroll-behavior:contain;
+      border-radius:26px !important;
+      padding:20px !important;
+      transform:translateY(14px) scale(.985);
+      opacity:0;
+      transition:transform .26s cubic-bezier(.2,.8,.2,1), opacity .22s ease;
+      will-change:transform,opacity;
+    }
+    .tch-home-more-modal.open .tch-home-more-panel{
+      transform:translateY(0) scale(1);
+      opacity:1;
+    }
+    #teacherMoreMenuModal .tch-home-more-panel > div:first-child{
+      align-items:flex-start;
+      flex-wrap:wrap;
+      row-gap:10px;
+    }
+    #teacherMoreMenuModal .tch-home-more-panel > div:first-child > div{
+      min-width:0;
+      flex:1 1 190px;
+    }
+    #teacherMoreMenuModal .tch-home-more-panel h3,
+    #teacherMoreMenuModal .tch-home-more-panel p,
+    #teacherMoreMenuModal .tch-home-more-panel button{
+      overflow-wrap:anywhere;
+      word-break:normal;
+    }
+    #teacherMoreMenuModal .grid{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px !important;
+    }
+    #teacherMoreMenuModal .tch-home-menu-card{
+      min-width:0;
+      min-height:100px;
+      padding:12px 9px !important;
+      border-radius:18px !important;
+      gap:8px !important;
+    }
+    #teacherMoreMenuModal .tch-home-menu-card > span:last-child{
+      display:block;
+      max-width:100%;
+      font-size:clamp(12px,2.8vw,14px);
+      line-height:1.25;
+      white-space:normal;
+      overflow-wrap:anywhere;
+      text-align:center;
+    }
+    #teacherMoreMenuModal .tch-home-menu-icon{
+      width:42px !important;
+      height:42px !important;
+      flex:0 0 42px;
+      font-size:1.2rem !important;
+    }
+
+    /* Kartu jadwal/pengumuman berada di dalam lapisan penopang dengan jarak konsisten */
+    .tch-home-layered-wrap{
+      padding:11px !important;
+      border-radius:28px !important;
+      background:linear-gradient(145deg,rgba(37,99,235,.13),rgba(148,163,184,.16)) !important;
+      box-sizing:border-box;
+      min-width:0;
+    }
+    .tch-home-layered-wrap:before{
+      inset:5px !important;
+      border-radius:23px !important;
+      background:rgba(37,99,235,.035) !important;
+    }
+    .tch-home-layered-wrap #teacherHomeSchedulePreview,
+    .tch-home-layered-wrap #teacherHomeAnnouncementPreview{
+      min-width:0;
+      gap:10px !important;
+    }
+    .tch-home-layered-wrap .tch-home-list-card{
+      width:100%;
+      min-width:0;
+      box-sizing:border-box;
+      padding:clamp(12px,3vw,18px) !important;
+      border-radius:20px !important;
+      overflow:hidden;
+    }
+    .tch-home-layered-wrap .tch-home-list-card .flex{
+      min-width:0;
+    }
+    .tch-home-layered-wrap .tch-home-list-card .min-w-0{
+      min-width:0;
+      overflow-wrap:anywhere;
+    }
+    .tch-home-layered-wrap .tch-home-list-card .font-black{
+      font-size:clamp(14px,3.5vw,18px) !important;
+      line-height:1.3 !important;
+      overflow-wrap:anywhere;
+    }
+    .tch-home-layered-wrap .tch-home-list-card p{
+      font-size:clamp(12px,3.1vw,15px) !important;
+      line-height:1.45 !important;
+      overflow-wrap:anywhere;
+    }
+    @media(max-width:640px){
+      .tch-home-more-modal{
+        align-items:flex-start !important;
+        padding:calc(12px + env(safe-area-inset-top)) 12px calc(112px + env(safe-area-inset-bottom)) !important;
+      }
+      .tch-home-more-panel{
+        width:min(520px,100%) !important;
+        max-height:calc(100dvh - 150px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+        margin:auto 0;
+        padding:16px !important;
+        border-radius:23px !important;
+      }
+      #teacherMoreMenuModal .tch-home-more-panel > div:first-child{
+        margin-bottom:14px !important;
+      }
+      #teacherMoreMenuModal .tch-home-more-panel > div:first-child button{
+        flex:0 0 auto;
+        padding:8px 11px !important;
+        font-size:12px !important;
+      }
+      #teacherMoreMenuModal .grid{gap:8px !important}
+      #teacherMoreMenuModal .tch-home-menu-card{min-height:88px;padding:9px 7px !important}
+      .tch-home-layered-wrap{padding:9px !important;border-radius:23px !important}
+      .tch-home-layered-wrap .tch-home-list-card{padding:12px !important;border-radius:17px !important}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .tch-home-more-panel{transition:none !important;transform:none !important}
+    }
+
   </style>
   <!-- EDUSTUDY UI refinement: thicker liquid-glass edge, RAF-coalesced drag, reusable GSAP quickTo -->
 
@@ -1319,15 +1493,10 @@
            TAB GURU HOME
            ==================================================================== -->
       <div id="tchTabHome" class="animate-enter space-y-6">
-        <section class="tch-home-greeting rounded-[28px] p-5 sm:p-7">
-          <div class="flex items-start justify-between gap-3">
-            <div class="min-w-0">
-              <div class="text-xs sm:text-sm font-extrabold uppercase tracking-[.16em] t-text-primary">Beranda Guru · EDUSTUDY</div>
-              <h2 class="text-2xl sm:text-4xl font-black t-text-main leading-tight mt-2">Good Morning, <span id="teacherHomeGreetingName">Guru</span>! 👋</h2>
-              <p class="text-sm sm:text-base t-text-muted mt-2">Siapkan pembelajaran hari ini dengan lebih mudah.</p>
-            </div>
-            <div class="hidden sm:flex w-14 h-14 rounded-2xl items-center justify-center t-bg-primary-soft t-text-primary text-3xl"><i class="ph-fill ph-graduation-cap"></i></div>
-          </div>
+        <section class="tch-home-greeting-simple">
+          <div class="text-[11px] sm:text-xs font-extrabold uppercase tracking-[.16em] t-text-primary">BERANDA GURU · EDUSTUDY</div>
+          <h2 class="text-xl sm:text-2xl font-black t-text-main mt-1">Good Morning, <span id="teacherHomeGreetingName">Guru</span>! 👋</h2>
+          <p class="text-xs sm:text-sm t-text-muted mt-1">Semoga kegiatan belajar hari ini berjalan lancar.</p>
         </section>
 
         <section class="tch-home-blue-card rounded-[30px] p-5 sm:p-7">
@@ -1356,30 +1525,26 @@
           </div>
         </section>
 
-        <section class="t-card rounded-[28px] p-4 sm:p-6">
-          <div class="flex items-center justify-between gap-3 mb-4">
-            <div>
-              <h3 class="tch-home-section-title">Menu Utama</h3>
-              <p class="text-xs sm:text-sm t-text-muted mt-1">Akses fitur yang paling sering digunakan.</p>
+        <section class="tch-home-menu-compact rounded-[24px] p-4 sm:p-5">
+          <div class="flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <h3 class="text-base sm:text-lg font-black t-text-main">Menu</h3>
+              <p class="text-xs t-text-muted mt-1">Akses cepat fitur guru.</p>
             </div>
-            <button type="button" onclick="openTeacherMoreMenu()" class="text-sm font-extrabold t-text-primary whitespace-nowrap">More Menu <i class="ph-bold ph-arrow-right"></i></button>
+            <button type="button" onclick="openTeacherMoreMenu()" class="text-sm font-extrabold t-text-primary whitespace-nowrap">Lainnya <i class="ph-bold ph-arrow-up-right"></i></button>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-            <button type="button" onclick="setTeacherTab('students')" class="tch-home-menu-card rounded-[24px] p-4 flex flex-col items-center text-center gap-2">
-              <span class="tch-home-menu-icon"><i class="ph-fill ph-users-three"></i></span>
-              <span class="font-black text-sm sm:text-base t-text-main">Siswa</span>
-            </button>
-            <button type="button" onclick="setTeacherTab('calendar')" class="tch-home-menu-card rounded-[24px] p-4 flex flex-col items-center text-center gap-2">
+          <div class="grid grid-cols-3 gap-2 sm:gap-3 mt-3">
+            <button type="button" onclick="setTeacherTab('calendar')" class="tch-home-menu-card tch-home-menu-card--compact rounded-2xl p-3 flex flex-col items-center text-center gap-2">
               <span class="tch-home-menu-icon"><i class="ph-fill ph-calendar-blank"></i></span>
-              <span class="font-black text-sm sm:text-base t-text-main">Jadwal</span>
+              <span class="font-extrabold text-xs sm:text-sm t-text-main">Jadwal</span>
             </button>
-            <button type="button" onclick="setTeacherTab('announcements')" class="tch-home-menu-card rounded-[24px] p-4 flex flex-col items-center text-center gap-2">
+            <button type="button" onclick="setTeacherTab('announcements')" class="tch-home-menu-card tch-home-menu-card--compact rounded-2xl p-3 flex flex-col items-center text-center gap-2">
               <span class="tch-home-menu-icon"><i class="ph-fill ph-megaphone-simple"></i></span>
-              <span class="font-black text-sm sm:text-base t-text-main">Pengumuman</span>
+              <span class="font-extrabold text-xs sm:text-sm t-text-main">Pengumuman</span>
             </button>
-            <button type="button" onclick="openTeacherMoreMenu()" class="tch-home-menu-card rounded-[24px] p-4 flex flex-col items-center text-center gap-2">
-              <span class="tch-home-menu-icon"><i class="ph-fill ph-squares-four"></i></span>
-              <span class="font-black text-sm sm:text-base t-text-main">Lainnya</span>
+            <button type="button" onclick="openTeacherMoreMenu()" class="tch-home-menu-card tch-home-menu-card--compact rounded-2xl p-3 flex flex-col items-center text-center gap-2">
+              <span class="tch-home-menu-icon"><i class="ph-fill ph-dots-nine"></i></span>
+              <span class="font-extrabold text-xs sm:text-sm t-text-main">More Menu</span>
             </button>
           </div>
         </section>
@@ -1392,7 +1557,7 @@
             </div>
             <button type="button" onclick="setTeacherTab('calendar')" class="text-sm font-extrabold t-text-primary whitespace-nowrap">See All <i class="ph-bold ph-arrow-right"></i></button>
           </div>
-          <div id="teacherHomeSchedulePreview" class="grid grid-cols-1 gap-3"></div>
+          <div class="tch-home-layered-wrap"><div id="teacherHomeSchedulePreview" class="grid grid-cols-1 gap-3"></div></div>
         </section>
 
         <section class="space-y-3">
@@ -1403,7 +1568,15 @@
             </div>
             <button type="button" onclick="setTeacherTab('announcements')" class="text-sm font-extrabold t-text-primary whitespace-nowrap">See All <i class="ph-bold ph-arrow-right"></i></button>
           </div>
-          <div id="teacherHomeAnnouncementPreview" class="grid grid-cols-1 gap-3"></div>
+          <div class="tch-home-layered-wrap tch-home-layered-wrap--announcement"><div id="teacherHomeAnnouncementPreview" class="grid grid-cols-1 gap-3"></div></div>
+        </section>
+
+        <section class="tch-home-tip rounded-[22px] p-4 flex items-center gap-3">
+          <span class="tch-home-tip-icon"><i class="ph-fill ph-lightbulb"></i></span>
+          <div class="min-w-0 flex-1">
+            <div class="font-extrabold text-sm t-text-main">Tips untuk hari ini</div>
+            <p class="text-xs t-text-muted mt-1">Periksa jadwal dan pengumuman agar informasi penting tersampaikan kepada siswa.</p>
+          </div>
         </section>
 
         <section class="tch-home-bottom-note rounded-[24px] p-4 sm:p-5 flex items-center gap-3">
@@ -1420,10 +1593,10 @@
         <div class="tch-home-more-panel">
           <div class="flex items-center justify-between gap-3 mb-5">
             <div>
-              <h3 class="text-xl sm:text-2xl font-black t-text-main">More Menu</h3>
-              <p class="text-sm t-text-muted mt-1">Akses cepat ke seluruh fitur guru tanpa membuat halaman Home terlalu penuh.</p>
+              <h3 class="text-xl sm:text-2xl font-black t-text-main">Menu Lainnya</h3>
+              <p class="text-sm t-text-muted mt-1">Pilih fitur yang ingin dibuka. Tekan kembali untuk kembali ke Beranda Guru.</p>
             </div>
-            <button type="button" onclick="closeTeacherMoreMenu()" class="t-btn-danger px-4 py-2 rounded-xl text-sm font-bold"><i class="ph-bold ph-x"></i></button>
+            <button type="button" onclick="closeTeacherMoreMenu()" class="t-btn-danger px-4 py-2 rounded-xl text-sm font-bold"><i class="ph-bold ph-arrow-left"></i> Kembali</button>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
             <button type="button" onclick="closeTeacherMoreMenu(); setTeacherTab('home');" class="tch-home-menu-card rounded-[24px] p-4 flex flex-col items-center text-center gap-3">
