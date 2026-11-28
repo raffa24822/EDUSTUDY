@@ -491,6 +491,23 @@
     .stu-home-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
     .stu-home-tile{border:1px solid var(--border-color);border-radius:20px;background:var(--bg-card);padding:16px;min-width:0;box-shadow:0 5px 16px rgba(15,23,42,.045)}
     .stu-home-tile-wide{grid-column:span 7}.stu-home-tile-side{grid-column:span 5}.stu-home-tile-half{grid-column:span 6}
+
+    .tch-home-greeting{background:linear-gradient(135deg,rgba(219,234,254,.88),rgba(239,246,255,.96));border:1px solid rgba(147,197,253,.35)}
+    .tch-home-bottom-note{background:linear-gradient(135deg,rgba(239,246,255,.98),rgba(255,255,255,.98));border:1px solid var(--border-color)}
+    #tchTabHome{min-width:0;overflow-wrap:anywhere}
+    #tchTabHome button{min-width:0}
+    #teacherHomeSchedulePreview article,#teacherHomeAnnouncementPreview article{width:100%;min-width:0}
+    #teacherHomeSchedulePreview article .text-2xl,#teacherHomeAnnouncementPreview article .text-2xl{font-size:clamp(1.05rem,3.8vw,1.45rem);line-height:1.3;overflow-wrap:anywhere}
+    @media(max-width:640px){
+      #tchTabHome{gap:1rem}
+      #tchTabHome .tch-home-blue-card{padding:1.2rem;border-radius:24px}
+      #tchTabHome .tch-home-stat-mini{padding:1rem;border-radius:20px}
+      #tchTabHome .tch-home-menu-card{padding:.85rem .55rem;border-radius:20px}
+      #tchTabHome .tch-home-menu-icon{width:48px;height:48px;border-radius:16px;font-size:1.25rem}
+      #tchTabHome .tch-home-section-title{font-size:1.05rem}
+      #tchTabHome .tch-home-bottom-note{align-items:flex-start}
+    }
+
     @media(max-width:767px){.stu-home-grid{gap:10px}.stu-home-tile{padding:13px;border-radius:17px}.stu-home-tile-wide,.stu-home-tile-side,.stu-home-tile-half{grid-column:span 12}}
     .calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
     .calendar-day{min-height:58px;border:1px solid var(--border-color);border-radius:12px;padding:6px 3px;background:var(--bg-card);text-align:center;position:relative;overflow:hidden}
@@ -1263,42 +1280,13 @@
          3. DASHBOARD GURU (KENDALI PENUH / ADMIN PANEL)
          ====================================================================== -->
     <section id="teacherDashboard" class="hidden mobile-bottom-space animate-enter">
-      <!-- Header Panel Guru -->
-      <div class="t-card p-5 sm:p-6 mb-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-        <div>
-          <div class="flex items-center gap-2 flex-wrap mb-1">
-            <span class="px-3 py-1 rounded-full text-xs font-bold t-badge-primary flex items-center gap-1">
-              <i class="ph-fill ph-crown"></i> Mode Kendali Penuh Guru
-            </span>
-            <span class="text-xs t-text-muted">Perubahan langsung sinkron ke Dashboard Siswa</span>
-          </div>
-          <h1 class="text-xl sm:text-2xl font-extrabold t-text-main">
-            Panel Manajemen <span id="teacherDashName" class="t-text-primary">Guru</span>
-          </h1>
-          <p class="text-xs sm:text-sm t-text-muted mt-0.5">
-            Kelola mata pelajaran, materi belajar, bank soal & kunci jawaban, serta pantau seluruh akun siswa.
-          </p>
-        </div>
-
-        <!-- Statistik Ringkas Kelas -->
-        <div class="grid grid-cols-4 gap-2 sm:gap-3 shrink-0">
-          <div class="t-bg-secondary border t-border rounded-2xl px-2.5 sm:px-4 py-2.5 text-center">
-            <div id="tchStatStudents" class="text-base sm:text-xl font-extrabold t-text-primary">0</div>
-            <div class="text-[10px] sm:text-xs font-semibold t-text-muted">Siswa</div>
-          </div>
-          <div class="t-bg-secondary border t-border rounded-2xl px-2.5 sm:px-4 py-2.5 text-center">
-            <div id="tchStatSubjects" class="text-base sm:text-xl font-extrabold t-text-main">0</div>
-            <div class="text-[10px] sm:text-xs font-semibold t-text-muted">Mapel</div>
-          </div>
-          <div class="t-bg-secondary border t-border rounded-2xl px-2.5 sm:px-4 py-2.5 text-center">
-            <div id="tchStatMaterials" class="text-base sm:text-xl font-extrabold t-text-main">0</div>
-            <div class="text-[10px] sm:text-xs font-semibold t-text-muted">Materi</div>
-          </div>
-          <div class="t-bg-secondary border t-border rounded-2xl px-2.5 sm:px-4 py-2.5 text-center">
-            <div id="tchStatQuestions" class="text-base sm:text-xl font-extrabold" style="color: var(--success);">0</div>
-            <div class="text-[10px] sm:text-xs font-semibold t-text-muted">Soal</div>
-          </div>
-        </div>
+      <!-- Header manajemen lama disembunyikan; ringkasan utama kini berada di Home -->
+      <div class="hidden" aria-hidden="true">
+        <span id="teacherDashName">Guru</span>
+        <span id="tchStatStudents">0</span>
+        <span id="tchStatSubjects">0</span>
+        <span id="tchStatMaterials">0</span>
+        <span id="tchStatQuestions">0</span>
       </div>
 
       <!-- Desktop Menu Tabs Guru (sticky saat scroll) -->
@@ -1331,83 +1319,101 @@
            TAB GURU HOME
            ==================================================================== -->
       <div id="tchTabHome" class="animate-enter space-y-6">
-        <div class="tch-home-greeting">
-          <h2 class="text-2xl sm:text-4xl font-black t-text-primary leading-tight">Good Morning, <span id="teacherHomeGreetingName">Guru</span>! 👋</h2>
-          <p class="text-sm sm:text-lg t-text-muted mt-2">Kelola pembelajaran, tugas, dan kelas dengan tampilan yang rapi, ringkas, dan cepat diakses.</p>
-        </div>
+        <section class="tch-home-greeting rounded-[28px] p-5 sm:p-7">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0">
+              <div class="text-xs sm:text-sm font-extrabold uppercase tracking-[.16em] t-text-primary">Beranda Guru · EDUSTUDY</div>
+              <h2 class="text-2xl sm:text-4xl font-black t-text-main leading-tight mt-2">Good Morning, <span id="teacherHomeGreetingName">Guru</span>! 👋</h2>
+              <p class="text-sm sm:text-base t-text-muted mt-2">Siapkan pembelajaran hari ini dengan lebih mudah.</p>
+            </div>
+            <div class="hidden sm:flex w-14 h-14 rounded-2xl items-center justify-center t-bg-primary-soft t-text-primary text-3xl"><i class="ph-fill ph-graduation-cap"></i></div>
+          </div>
+        </section>
 
-        <div class="tch-home-blue-card rounded-[30px] p-5 sm:p-6">
-          <div class="text-xs sm:text-sm font-extrabold uppercase tracking-[0.18em] subtle">Ringkasan Dashboard Guru</div>
-          <div class="mt-5 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <section class="tch-home-blue-card rounded-[30px] p-5 sm:p-7">
+          <div class="text-xs sm:text-sm font-extrabold uppercase tracking-[.18em] subtle">Ringkasan Kehadiran Kelas</div>
+          <div class="mt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
-              <div class="text-4xl sm:text-6xl font-black leading-none" id="tchHomeHeroStudents">0</div>
-              <div class="text-xl sm:text-2xl font-bold mt-2">Akun Siswa Aktif</div>
+              <div class="text-5xl sm:text-6xl font-black leading-none" id="tchHomeHeroStudents">0</div>
+              <div class="text-lg sm:text-2xl font-bold mt-2">Siswa Terdaftar</div>
             </div>
-            <div class="grid grid-cols-2 gap-3 min-w-[220px]">
-              <div class="rounded-2xl bg-white/12 px-4 py-3">
-                <div class="text-xs font-extrabold uppercase tracking-[0.12em] subtle">Mapel</div>
-                <div class="text-2xl font-black mt-1" id="tchHomeHeroSubjects">0</div>
-              </div>
-              <div class="rounded-2xl bg-white/12 px-4 py-3">
-                <div class="text-xs font-extrabold uppercase tracking-[0.12em] subtle">Bank Soal</div>
-                <div class="text-2xl font-black mt-1" id="tchHomeHeroQuestions">0</div>
-              </div>
-            </div>
+            <div class="text-sm subtle sm:text-right">Pantau siswa, materi, dan aktivitas<br class="hidden sm:block"/> pembelajaran dari satu tempat.</div>
           </div>
-        </div>
+        </section>
 
-        <div class="grid grid-cols-2 gap-4">
-          <div class="tch-home-stat-mini rounded-[26px] p-5">
-            <div class="text-xs sm:text-sm font-extrabold uppercase tracking-[0.14em] t-text-muted">Upcoming Deadlines</div>
-            <div class="text-4xl font-black t-text-primary mt-3" id="tchHomeUpcomingCount">0</div>
+        <section class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div class="tch-home-stat-mini rounded-[24px] p-4 sm:p-5">
+            <div class="text-xs sm:text-sm font-bold t-text-muted">Mata Pelajaran</div>
+            <div class="text-3xl sm:text-4xl font-black t-text-primary mt-2" id="tchHomeHeroSubjects">0</div>
           </div>
-          <div class="tch-home-stat-mini rounded-[26px] p-5">
-            <div class="text-xs sm:text-sm font-extrabold uppercase tracking-[0.14em] t-text-muted">Average Grade</div>
-            <div class="text-4xl font-black mt-3" style="color:var(--success)" id="tchHomeAverageGrade">0.0</div>
+          <div class="tch-home-stat-mini rounded-[24px] p-4 sm:p-5">
+            <div class="text-xs sm:text-sm font-bold t-text-muted">Bank Soal</div>
+            <div class="text-3xl sm:text-4xl font-black t-text-main mt-2" id="tchHomeHeroQuestions">0</div>
           </div>
-        </div>
+          <div class="tch-home-stat-mini rounded-[24px] p-4 sm:p-5 col-span-2 sm:col-span-1">
+            <div class="text-xs sm:text-sm font-bold t-text-muted">Jadwal Mendatang</div>
+            <div class="text-3xl sm:text-4xl font-black mt-2" style="color:var(--success)" id="tchHomeUpcomingCount">0</div>
+          </div>
+        </section>
 
-        <div class="t-card rounded-[30px] p-5 sm:p-6">
+        <section class="t-card rounded-[28px] p-4 sm:p-6">
           <div class="flex items-center justify-between gap-3 mb-4">
-            <div class="tch-home-section-title">Menu Cepat</div>
-            <button type="button" onclick="openTeacherMoreMenu()" class="text-sm font-bold t-text-primary">See All</button>
+            <div>
+              <h3 class="tch-home-section-title">Menu Utama</h3>
+              <p class="text-xs sm:text-sm t-text-muted mt-1">Akses fitur yang paling sering digunakan.</p>
+            </div>
+            <button type="button" onclick="openTeacherMoreMenu()" class="text-sm font-extrabold t-text-primary whitespace-nowrap">More Menu <i class="ph-bold ph-arrow-right"></i></button>
           </div>
-          <div class="grid grid-cols-4 gap-3 sm:gap-4">
-            <button type="button" onclick="setTeacherTab('students')" class="tch-home-menu-card rounded-[26px] p-4 sm:p-5 flex flex-col items-center text-center gap-3">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+            <button type="button" onclick="setTeacherTab('students')" class="tch-home-menu-card rounded-[24px] p-4 flex flex-col items-center text-center gap-2">
               <span class="tch-home-menu-icon"><i class="ph-fill ph-users-three"></i></span>
               <span class="font-black text-sm sm:text-base t-text-main">Siswa</span>
             </button>
-            <button type="button" onclick="setTeacherTab('calendar')" class="tch-home-menu-card rounded-[26px] p-4 sm:p-5 flex flex-col items-center text-center gap-3">
+            <button type="button" onclick="setTeacherTab('calendar')" class="tch-home-menu-card rounded-[24px] p-4 flex flex-col items-center text-center gap-2">
               <span class="tch-home-menu-icon"><i class="ph-fill ph-calendar-blank"></i></span>
               <span class="font-black text-sm sm:text-base t-text-main">Jadwal</span>
             </button>
-            <button type="button" onclick="setTeacherTab('announcements')" class="tch-home-menu-card rounded-[26px] p-4 sm:p-5 flex flex-col items-center text-center gap-3">
+            <button type="button" onclick="setTeacherTab('announcements')" class="tch-home-menu-card rounded-[24px] p-4 flex flex-col items-center text-center gap-2">
               <span class="tch-home-menu-icon"><i class="ph-fill ph-megaphone-simple"></i></span>
               <span class="font-black text-sm sm:text-base t-text-main">Pengumuman</span>
             </button>
-            <button type="button" onclick="openTeacherMoreMenu()" class="tch-home-menu-card rounded-[26px] p-4 sm:p-5 flex flex-col items-center text-center gap-3">
-              <span class="tch-home-menu-icon"><i class="ph-fill ph-dots-nine"></i></span>
-              <span class="font-black text-sm sm:text-base t-text-main">More Menu</span>
+            <button type="button" onclick="openTeacherMoreMenu()" class="tch-home-menu-card rounded-[24px] p-4 flex flex-col items-center text-center gap-2">
+              <span class="tch-home-menu-icon"><i class="ph-fill ph-squares-four"></i></span>
+              <span class="font-black text-sm sm:text-base t-text-main">Lainnya</span>
             </button>
           </div>
-        </div>
+        </section>
 
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between gap-3">
-              <div class="tch-home-section-title">Today's Schedule</div>
-              <button type="button" onclick="setTeacherTab('calendar')" class="text-sm font-bold t-text-primary">See All</button>
+        <section class="space-y-3">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <h3 class="tch-home-section-title">Jadwal</h3>
+              <p class="text-xs sm:text-sm t-text-muted mt-1">Agenda dan kegiatan yang telah dibuat guru.</p>
             </div>
-            <div id="teacherHomeSchedulePreview" class="space-y-3"></div>
+            <button type="button" onclick="setTeacherTab('calendar')" class="text-sm font-extrabold t-text-primary whitespace-nowrap">See All <i class="ph-bold ph-arrow-right"></i></button>
           </div>
-          <div class="space-y-4">
-            <div class="flex items-center justify-between gap-3">
-              <div class="tch-home-section-title">Announcements</div>
-              <button type="button" onclick="setTeacherTab('announcements')" class="text-sm font-bold t-text-primary">See All</button>
+          <div id="teacherHomeSchedulePreview" class="grid grid-cols-1 gap-3"></div>
+        </section>
+
+        <section class="space-y-3">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <h3 class="tch-home-section-title">Announcement</h3>
+              <p class="text-xs sm:text-sm t-text-muted mt-1">Pengumuman terbaru untuk siswa.</p>
             </div>
-            <div id="teacherHomeAnnouncementPreview" class="space-y-3"></div>
+            <button type="button" onclick="setTeacherTab('announcements')" class="text-sm font-extrabold t-text-primary whitespace-nowrap">See All <i class="ph-bold ph-arrow-right"></i></button>
           </div>
-        </div>
+          <div id="teacherHomeAnnouncementPreview" class="grid grid-cols-1 gap-3"></div>
+        </section>
+
+        <section class="tch-home-bottom-note rounded-[24px] p-4 sm:p-5 flex items-center gap-3">
+          <div class="tch-home-menu-icon shrink-0"><i class="ph-fill ph-lightbulb"></i></div>
+          <div class="min-w-0 flex-1">
+            <div class="font-black t-text-main">Butuh bantuan menyiapkan kelas?</div>
+            <p class="text-xs sm:text-sm t-text-muted mt-1">Gunakan AI Pengajaran untuk membuat soal, mapel, dan materi lebih cepat.</p>
+          </div>
+          <button type="button" onclick="setTeacherTab('ai-parser')" class="t-btn-primary rounded-xl px-3 py-2 text-xs sm:text-sm font-bold whitespace-nowrap">Buka AI</button>
+        </section>
       </div>
 
       <div id="teacherMoreMenuModal" class="tch-home-more-modal" aria-hidden="true">
@@ -3720,6 +3726,7 @@ Bentuk soal dipilih sebelum deteksi. Periksa kembali kunci dan hasil deteksi seb
     // =========================================================================
 
     
+
     function renderTeacherHome() {
       const teacherNameEl = document.getElementById('teacherHomeGreetingName');
       if (teacherNameEl) teacherNameEl.textContent = currentSession?.usn || 'Guru';
@@ -3728,75 +3735,64 @@ Bentuk soal dipilih sebelum deteksi. Periksa kembali kunci dan hasil deteksi seb
       const subjects = appDB.subjects || [];
       const calendarEvents = appDB.calendarEvents || [];
       const announcements = appDB.announcements || [];
-      const now = Date.now();
       const todayStr = dateKeyLocal ? dateKeyLocal(new Date()) : new Date().toISOString().slice(0,10);
-
-      const totalStudents = students.length;
-      const totalSubjects = subjects.length;
-      const totalQuestions = subjects.reduce((sum, s) => sum + ((s.questions || []).length), 0);
-
-      const allScores = students.flatMap(st => (st.scores || []).map(sc => Number(sc.score ?? sc.finalScore ?? 0)).filter(v => !Number.isNaN(v)));
-      const averageGrade = allScores.length ? (allScores.reduce((a,b)=>a+b,0) / allScores.length).toFixed(1) : '0.0';
-      const upcomingCount = calendarEvents.filter(ev => ev?.date && String(ev.date) >= todayStr).length;
+      const totalQuestions = subjects.reduce((sum, subject) => sum + ((subject.questions || []).length), 0);
+      const upcoming = calendarEvents.filter(event => event?.date && String(event.date) >= todayStr);
 
       const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
-      setText('tchHomeHeroStudents', totalStudents);
-      setText('tchHomeHeroSubjects', totalSubjects);
+      setText('tchHomeHeroStudents', students.length);
+      setText('tchHomeHeroSubjects', subjects.length);
       setText('tchHomeHeroQuestions', totalQuestions);
-      setText('tchHomeUpcomingCount', upcomingCount);
-      setText('tchHomeAverageGrade', averageGrade);
+      setText('tchHomeUpcomingCount', upcoming.length);
 
       const scheduleBox = document.getElementById('teacherHomeSchedulePreview');
       if (scheduleBox) {
-        const items = [...calendarEvents]
-          .filter(ev => ev && ev.date)
-          .sort((a,b) => String(a.date).localeCompare(String(b.date)))
-          .filter(ev => String(ev.date) >= todayStr)
-          .slice(0, 2);
-        scheduleBox.innerHTML = items.length ? items.map(ev => `
-          <article class="tch-home-list-card rounded-[26px] p-5">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <div class="text-xs font-extrabold uppercase tracking-[0.14em] t-text-primary">${escapeHTML(ev.date || '-')}</div>
-                <div class="mt-3 text-2xl font-black t-text-main">${escapeHTML(ev.title || 'Agenda Kegiatan')}</div>
-                <p class="text-sm t-text-muted mt-2">${escapeHTML(ev.note || ev.description || 'Belum ada catatan kegiatan.')}</p>
+        const items = [...upcoming].sort((a,b) => String(a.date).localeCompare(String(b.date))).slice(0,4);
+        scheduleBox.innerHTML = items.length ? items.map(event => `
+          <article class="tch-home-list-card rounded-[24px] p-4 sm:p-5">
+            <div class="flex items-start gap-3 sm:gap-4">
+              <div class="shrink-0 rounded-2xl px-3 py-3 text-center t-bg-primary-soft t-text-primary min-w-[66px]">
+                <div class="text-xs font-extrabold">${escapeHTML(String(event.date || '').slice(8,10) || '--')}</div>
+                <div class="text-[10px] font-bold uppercase">${escapeHTML(String(event.date || '').slice(5,7) || '')}</div>
               </div>
-              <span class="w-3 h-3 rounded-full shrink-0 mt-1" style="background:${escapeHTML(ev.color || '#2563eb')}"></span>
+              <div class="min-w-0 flex-1">
+                <div class="font-black text-base sm:text-lg t-text-main break-words">${escapeHTML(event.title || event.name || 'Agenda Kegiatan')}</div>
+                <p class="text-sm t-text-muted mt-1 break-words">${escapeHTML(event.note || event.description || event.details || 'Agenda kegiatan sekolah.')}</p>
+                <div class="text-xs font-bold t-text-primary mt-2">${escapeHTML(event.date || '')}</div>
+              </div>
+              <span class="w-3 h-3 rounded-full shrink-0 mt-1" style="background:${escapeHTML(event.color || '#2563eb')}"></span>
             </div>
           </article>
         `).join('') : `
-          <article class="tch-home-list-card rounded-[26px] p-5">
-            <div class="text-center py-8">
-              <div class="text-3xl mb-3">📅</div>
-              <div class="text-xl font-black t-text-main">Belum Ada Jadwal</div>
-              <p class="text-sm t-text-muted mt-2">Tambahkan jadwal dari menu Jadwal agar siswa dapat melihat agenda terbaru.</p>
-            </div>
-          </article>
-        `;
+          <article class="tch-home-list-card rounded-[24px] p-5 text-center">
+            <div class="text-3xl mb-2">📅</div>
+            <div class="font-black text-base t-text-main">Belum ada jadwal</div>
+            <p class="text-sm t-text-muted mt-1">Jadwal yang dibuat guru akan tampil di sini.</p>
+            <button type="button" onclick="setTeacherTab('calendar')" class="t-btn-secondary rounded-xl px-4 py-2 text-sm font-bold mt-3">Tambah Jadwal</button>
+          </article>`;
       }
 
       const announcementBox = document.getElementById('teacherHomeAnnouncementPreview');
       if (announcementBox) {
-        const items = [...announcements].slice().reverse().slice(0, 2);
-        announcementBox.innerHTML = items.length ? items.map((item, index) => `
-          <article class="tch-home-list-card rounded-[26px] p-5">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <div class="text-xs font-extrabold uppercase tracking-[0.14em] t-text-primary">Announcement ${index + 1}</div>
-                <div class="mt-3 text-2xl font-black t-text-main">${escapeHTML(item.title || 'Pengumuman')}</div>
-                <p class="text-sm t-text-muted mt-2">${escapeHTML((item.message || '').slice(0, 130) || 'Belum ada isi pengumuman.')}${(item.message || '').length > 130 ? '...' : ''}</p>
+        const items = [...announcements].slice().reverse().slice(0,4);
+        announcementBox.innerHTML = items.length ? items.map(item => `
+          <article class="tch-home-list-card rounded-[24px] p-4 sm:p-5">
+            <div class="flex items-start gap-3">
+              <div class="tch-home-menu-icon shrink-0"><i class="ph-fill ph-megaphone-simple"></i></div>
+              <div class="min-w-0 flex-1">
+                <div class="font-black text-base sm:text-lg t-text-main break-words">${escapeHTML(item.title || 'Pengumuman')}</div>
+                <p class="text-sm t-text-muted mt-1 break-words">${escapeHTML((item.message || item.content || item.description || 'Informasi untuk siswa.').slice(0,180))}${(item.message || item.content || item.description || '').length > 180 ? '…' : ''}</p>
+                <div class="text-xs t-text-muted mt-2">${escapeHTML(item.date || item.createdAt || '')}</div>
               </div>
             </div>
           </article>
         `).join('') : `
-          <article class="tch-home-list-card rounded-[26px] p-5">
-            <div class="text-center py-8">
-              <div class="text-3xl mb-3">📣</div>
-              <div class="text-xl font-black t-text-main">Belum Ada Pengumuman</div>
-              <p class="text-sm t-text-muted mt-2">Gunakan menu Pengumuman untuk membuat informasi baru bagi siswa.</p>
-            </div>
-          </article>
-        `;
+          <article class="tch-home-list-card rounded-[24px] p-5 text-center">
+            <div class="text-3xl mb-2">📣</div>
+            <div class="font-black text-base t-text-main">Belum ada pengumuman</div>
+            <p class="text-sm t-text-muted mt-1">Pengumuman yang dibuat guru akan tampil di sini.</p>
+            <button type="button" onclick="setTeacherTab('announcements')" class="t-btn-secondary rounded-xl px-4 py-2 text-sm font-bold mt-3">Buat Pengumuman</button>
+          </article>`;
       }
     }
 
